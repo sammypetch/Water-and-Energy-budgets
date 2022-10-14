@@ -120,7 +120,7 @@ def mm_w_array(masked_data, basin_no):
         monthly_mean[i] = np.mean(data[i::12])
     return monthly_mean
 
-def stor_stom_smooth(b):
+def stor_stom(b):
     '''
     Calculates smoothed GRACE data for the start of month
     
