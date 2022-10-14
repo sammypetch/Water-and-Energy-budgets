@@ -53,7 +53,7 @@ b = # USER DEFINE BASIN NUMBER
 
 Pobs,Qobs, LEobs, dSobs, DSRobs, DLRobs, USWobs ,ULWobs, SHobs , NETobs = basin_fluxes(b) # basin observed fluxes
 GRACE_stom =  stom_storage(b) # start of month GRACE water storage  data 
-FISeD =  FIS(b) # Flux inferred energy storage 
+FISeD =  calculate_FISeD(b) # Flux inferred energy storage 
 
 md2cm = 3.046 # mm/day to cm/month conversion constant
 n = len(Pobs) # number of months of observations  
