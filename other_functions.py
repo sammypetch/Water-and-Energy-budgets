@@ -105,3 +105,17 @@ def mask_continent2d(data, cont_no):
                 mask_boolean[i,j] = 1
     masked_data = ma.masked_array(data, mask = mask_boolean)
     return masked_data
+
+
+
+def mm_w_array(masked_data, basin_no):
+    '''
+    input: masked data, basin id number
+    Produces monthly mean weighted array
+    this will weight the data according to gridbox size 
+    '''
+    data = weight(masked_data, basin_no)
+    monthly_mean= np.zeros(12)
+    for i in range(12):
+        monthly_mean[i] = np.mean(data[i::12])
+    return monthly_mean
