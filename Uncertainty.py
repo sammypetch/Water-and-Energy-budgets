@@ -1,5 +1,5 @@
 
-def basin_error(C, B, cont_flux, cont_error):
+    def basin_error(C, b, F , F_error):
     '''
     calculates basin uncertainty by downscaling continental uncertainties using assosiated areas.
     
@@ -9,14 +9,26 @@ def basin_error(C, B, cont_flux, cont_error):
     B = basin number
     enter basin id number from 1-28
     
-    cont_flux = average continental flux taken from NEWS
-    cont_error = average continetal flux error taken from NEWS 
+    select flux
+    F = i.e one of {P, Q, LE, DSR, DLR, USW, ULW, SH}
+    
+    F_error = i.e {P_error, Q_error ..} uncertainties from NEWS.  
 
     '''
     
     C_area =  Area_cont[C-1] # continent area
-    B_area = Basin_areas[B-1] # basin area 
-     
+    B_area = Basin_areas[b-1] # basin area 
+    
+    cont_flux = mask_continent(F,C)
+    
+    clat_C = mask_continent2d(clat2D,C) # cosine latitude 
+    weighted_cont_flux = np.zeros(12)
+    for i in range(12):
+        weighted_cont_flux[i] = (C_flux[i,:,:]*clat_C).sum()/(clat_C).sum()
+        
+    cont_flux = weighted_cont_flux
+    basin_flux = mm_w_array(mask_data(F,b),b)) # monthly mean weaighted array of basin flux
+   
     error = np.zeros(12)
     for i in range(12):
         error[i] = np.sqrt((basin_flux[i]/cont_flux[i])/(B_area/C_area))*cont_error[i] 
@@ -33,4 +45,6 @@ Basin_areas = [5853804,3826122,3698802.75,3202958.75,2902864.5,2661391.75
 1070229.875,1047385.687,1039361.750,1031512.062,977516.437,967340.562,
 943577.187,893627.312]
 
-
+# example for Amazon basin 
+Perror = basin_error(2, 1 , P, PNEWS_error) 
+Qerror = basin_Error(2,1, Q, QNEWS_error) 
