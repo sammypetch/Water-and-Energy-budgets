@@ -45,6 +45,11 @@ Basin_areas = [5853804,3826122,3698802.75,3202958.75,2902864.5,2661391.75
 1070229.875,1047385.687,1039361.750,1031512.062,977516.437,967340.562,
 943577.187,893627.312]
 
+
+lat_rad = b_lat*np.pi/180 # convert latitude to radians
+cos_lat = np.cos(lat_rad) # coaine latitude for weighting data 
+lons2D, clat2D = np.meshgrid(b_lon,cos_lat)
+
 # example for Amazon basin 
 Perror = basin_error(2, 1 , P, PNEWS_error) 
 Qerror = basin_Error(2,1, Q, QNEWS_error) 
