@@ -52,6 +52,7 @@ def optimisation(month):
 b = # USER DEFINE BASIN NUMBER
 
 Pobs,Qobs, LEobs, dSobs, DSRobs, DLRobs, USWobs ,ULWobs, SHobs , NETobs = basin_fluxes(b) # basin observed fluxes
+Perror,Qerror, LEerror, DSRerror, DLRerror, USWerror, ULWerror , SHerror = basin_unertainty(b)
 GRACE_stom =  stom_storage(b) # start of month GRACE water storage  data 
 FISeD =  calculate_FISeD(b) # Flux inferred energy storage 
 
