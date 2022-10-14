@@ -119,3 +119,63 @@ def mm_w_array(masked_data, basin_no):
     for i in range(12):
         monthly_mean[i] = np.mean(data[i::12])
     return monthly_mean
+
+def stor_stom_smooth(b):
+    '''
+    Calculates smoothed GRACE data for the start of month
+    
+    Input: basin id
+    output: Start of month GRACE data
+    '''
+    
+    storage2 = weight(mask_data(S_fill[10:156],b),b)
+
+    stom_smooth = np.zeros(142)
+    for i in range(142):
+        stom_smooth[i] =  storage2[i]/8 +storage2[i+1]*(3/8) +storage2[i+2]*(3/8)+ storage2[i+3]/8
+    return stom_smooth
+
+
+def calculate_FISeD(NET):
+    mean = np.mean(NET)
+    NET_detrended = NET - mean
+    FISeD = np.insert(np.cumsum(NET_detrended),0,0)
+    return FISeD
+
+def smoothing(data):
+    '''
+    Use to temporally smooth 2D data
+    input: data
+    output: smoothed data 
+    '''
+    l = len(data)
+    n = l - 4
+    smoothed_data = np.zeros(n)
+    for i in range(n):
+        smoothed_data[i] = data[i]/22 +data[i+1]/4 + data[i+2]*(9/22) + data[i+3]/4 +data[i+4]/22
+    return smoothed_data  
+
+
+def basin_flux(basin_no):
+    '''
+    input: basin id number
+    output: basin fluxes
+    2002-2013
+    '''
+    b = basin_no
+    DSRb = weight(mask_data(DSR[22:166,:,:], b),b)
+    DLRb = weight(mask_data(DLR[22:166,:,:], b),b)
+    USWb = weight(mask_data(USW[22:166,:,:], b),b)
+    ULWb = weight(mask_data(ULW[22:166,:,:], b),b)
+    LEb = weight(mask_data(LE[12:,:,:], b),b)
+    SHb = weight(mask_data(SH[12:,:,:], b),b)
+    Pb = weight(mask_data(P[12:156,:,:], b),b)
+    Qb = weight(mask_data(Q[12:156], b),b)
+    dSb = weight(mask_data(dS[0:144], b),b)
+    # starts Dec 2001
+    storageb = weight(mask_data(S_fill[11:157],b),b)
+    
+    netb = DSRb + DLRb- LEb - SHb- USWb -ULWb
+
+    return Pb,Qb,LEb,dSb,DSRb,DLRb,USWb,ULWb,SHb, storageb, netb
+
