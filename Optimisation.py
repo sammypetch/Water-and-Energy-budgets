@@ -51,7 +51,7 @@ def optimisation(month):
 
 b = # USER DEFINE BASIN NUMBER
 
-Pobs,Qobs, LEobs, dSobs, DSRobs, DLRobs, USWobs ,ULWobs, SHobs , NETobs = basin_fluxes(b) # basin observed fluxes
+Pobs, Qobs, LEobs, dSobs, DSRobs, DLRobs, USWobs ,ULWobs, SHobs , NETobs = basin_fluxes(b) # basin observed fluxes
 GRACE_stom =  stor_stom(b) # start of month GRACE water storage  data 
 FISeD =  calculate_FISeD(b) # Flux inferred energy storage 
 
@@ -82,7 +82,7 @@ for i in range(n):
 basin_opt_sol = opt_sol.reshape(n,12)
 
 # Optimised fluxes,  units:  mm/day
-Popt= basin_opt_sol[:,0] # precipitation
+Popt = basin_opt_sol[:,0] # precipitation
 Qopt = basin_opt_sol[:,1] # runoff 
 LEopt = basin_opt_sol[:,2] # latent heat
 dSopt = basin_opt_sol[:,3] # storage change
@@ -90,6 +90,6 @@ DSRopt = basin_opt_sol[:,4] # downwards shortwave
 DLRopt = basin_opt_sol[:,5] # downwards longwave
 USWopt = basin_opt_sol[:,6] # upwards shortwave
 ULWopt = basin_opt_sol[:,7] # upwards longwave
-SHopt= basin_opt_sol:,8] # sensible heat 
+SHopt = basin_opt_sol:,8] # sensible heat 
 NETopt = basin_opt_sol[:,9] # NET 
 
