@@ -28,7 +28,7 @@ LE_fn = 'LE.RS_METEO.EBC-ALL.MLM-ALL.METEO-ALL.720_360.nc' # filename
 letdat = Dataset(LE_fn)
 
 # Sensible heat data (SH)
-SH_fn= 'H.RS_METEO.EBC-ALL.MLM-ALL.METEO-ALL.720_360.monthly.nc'
+SH_fn = 'H.RS_METEO.EBC-ALL.MLM-ALL.METEO-ALL.720_360.monthly.nc'
 SH01_data = Dataset(SH_fn)
   
 # Runoff data (Q)
@@ -112,7 +112,7 @@ def match_mask_dims(data):
 # create global data o same dimensions as mask  
 DSR_global = match_mask_dims(srf_down_sw) 
 DLR_global = match_mask_dims(srf_down_lw)
-USW_global  = match_mask_dims(srf_up_sw) 
+USW_global = match_mask_dims(srf_up_sw) 
 ULW_global = match_mask_dims(srf_up_lw) 
 Rn_global = match_mask_dims(srf_net_tot)  
 
