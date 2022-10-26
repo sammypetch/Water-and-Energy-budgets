@@ -1,5 +1,5 @@
 
-    def basin_error(C, b, F , F_error):
+def basin_error(C, b, F , F_error):
     '''
     calculates basin uncertainty by downscaling continental uncertainties using assosiated areas.
     
